@@ -1,0 +1,12 @@
+[project]
+name = "a3-ait"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "sentencepiece>=0.2.1",
+    "torch>=2.10.0",
+    "tqdm>=4.67.3",
+]
