@@ -82,3 +82,6 @@ A simple Flask web application was implemented in `app/web_app.py`.
 cd app
 pip install -r ../requirements.txt
 python web_app.py
+
+### Website UI
+![Website for Translation](image/website_ui.png)
