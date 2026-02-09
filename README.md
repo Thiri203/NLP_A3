@@ -62,7 +62,8 @@ Due to font limitations, some Myanmar characters may not render correctly in Mat
 ---
 
 ## 6. Web Application (Task 4)
-
+### Website UI
+![Website for Translation](image/website_ui.png)
 A simple Flask web application was implemented in `app/web_app.py`.
 
 ### Features
@@ -83,5 +84,6 @@ cd app
 pip install -r ../requirements.txt
 python web_app.py
 
-### Website UI
-![Website for Translation](image/website_ui.png)
+
+
+
