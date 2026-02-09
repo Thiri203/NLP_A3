@@ -3,7 +3,6 @@ import torch
 import sentencepiece as spm
 from pathlib import Path
 
-# ---------------- setup ----------------
 app = Flask(__name__)
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -15,7 +14,7 @@ sp_my = spm.SentencePieceProcessor(model_file=str(app_dir / "spm_my.model"))
 PAD_EN = sp_en.pad_id()
 PAD_MY = sp_my.pad_id()
 
-# ---------------- model definitions ----------------
+#model
 import torch.nn as nn
 import torch.nn.functional as F
 
@@ -81,7 +80,7 @@ class Seq2Seq(nn.Module):
     def create_mask(self, src):
         return (src == PAD_EN).permute(1,0)
 
-# ---------------- load model ----------------
+#loading model
 ckpt = torch.load(str(app_dir / "additive_model.pt"), map_location=device)
 
 attention = AdditiveAttention(ckpt["hid_dim"])
@@ -91,7 +90,7 @@ model = Seq2Seq(encoder, decoder).to(device)
 model.load_state_dict(ckpt["model_state"])
 model.eval()
 
-# ---------------- translation ----------------
+
 @torch.no_grad()
 def translate(sentence, max_len=50):
     src_ids = [sp_en.bos_id()] + sp_en.encode(sentence, out_type=int) + [sp_en.eos_id()]
@@ -114,7 +113,7 @@ def translate(sentence, max_len=50):
 
     return sp_my.decode(out_ids)
 
-# ---------------- web UI ----------------
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     output = ""
